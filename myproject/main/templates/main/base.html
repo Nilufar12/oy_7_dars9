@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>O'quv Markazi</title>
+    </head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Bosh sahifa</a> |
+        </nav>
+    </header>
+`   <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2026 O'quv Markazi tizimi</p>
+    </footer>
+</body>
+</html>

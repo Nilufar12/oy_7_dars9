@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h2>Yangi talaba qo'shish</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Saqlash</button>
+</form>
+<br>
+<a href="{% url 'home' %}">Orqaga</a>
+{% endblock %}

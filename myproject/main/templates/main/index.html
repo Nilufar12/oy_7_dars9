@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2>Kurslar</h2>
+    {% for course in courses %}
+            <a href="{% url 'course_detail' course.id %}">{{ course.name }}</a>
+            {{ course.price }} so'm
+        {% endfor %}
+    
+    <h2>Talabalar</h2>
+    {% for student in students %}
+             <a href="{% url 'student_detail' student.id %}">{{ student.full_name }}</a>
+         {% endfor %}
+{% endblock %}

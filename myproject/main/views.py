@@ -65,3 +65,15 @@ def add_student(request):
         'form': form
     }
     return render(request, 'main/add_student.html', context)
+
+
+def update_student(request: HttpRequest, student_id: int):
+    student = get_object_or_404(Student, pk=student_id)
+    if request.method == 'POST':
+        form = StudentForm(data=request.POST, files=request.FILES, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect(student_detail, student_id=student.id)
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'main/update_student.html', {'form': form})

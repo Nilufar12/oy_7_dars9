@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required, login_required
 from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -17,6 +18,7 @@ def home(request: HttpRequest):
     return render(request, 'main/index.html', context)
 
 
+@permission_required('myproject.view_course', raise_exception=True, login_url='login')
 def course_detail(request, course_id: int):
     course = Course.objects.get(pk=course_id)
     student = Student.objects.filter(course=course)
@@ -29,15 +31,16 @@ def course_detail(request, course_id: int):
     return render(request, 'main/detail.html')
 
 
+@permission_required('myproject.view_student', raise_exception=True, login_url='login')
 def student_detail(request, student_id: int):
     student = get_object_or_404(Student, pk=student_id)
     context = {
         'student': student
     }
-
     return render(request, 'main/detail.html', context)
 
 
+@permission_required('myproject.add_course', raise_exception=True, login_url='login')
 def add_course(request):
     if request.method == "POST":
         form = CourseForm(request.POST)
@@ -53,6 +56,7 @@ def add_course(request):
     return render(request, 'main/add_course.html', context)
 
 
+@permission_required('myproject.add_student', raise_exception=True, login_url='login')
 def add_student(request):
     if request.method == "POST":
         form = StudentForm(request.POST)
@@ -67,6 +71,7 @@ def add_student(request):
     return render(request, 'main/add_student.html', context)
 
 
+@permission_required('myproject.change_student', raise_exception=True, login_url='login')
 def update_student(request: HttpRequest, student_id: int):
     student = get_object_or_404(Student, pk=student_id)
     if request.method == 'POST':

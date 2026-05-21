@@ -3,6 +3,7 @@
 {% block title %}{{ course.name }} tafsilotlari{% endblock %}
 
 {% block content %}
+    {% if perms.myproject.change_course %}
     <h2>Kurs: {{ course.name }}</h2>
     <hr>
 
@@ -23,7 +24,7 @@
             </tr>
         </tbody>
     </table>
-
+    {% endif %}
     <br>
     <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
 {% endblock %}

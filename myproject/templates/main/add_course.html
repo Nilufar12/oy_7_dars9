@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if perms.myproject.add_course %}
 <h2>Yangi kurs qo'shish</h2>
 <form method="POST">
     {% csrf_token %}
@@ -8,5 +9,6 @@
     <button type="submit">Saqlash</button>
 </form>
 <br>
+{% endif %}
 <a href="{% url 'home' %}">Orqaga</a>
 {% endblock %}

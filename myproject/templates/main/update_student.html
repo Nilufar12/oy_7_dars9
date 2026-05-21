@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if perm.myproject.change_student %}
 <h2>Talaba ma'lumotlarini o'zgartirish</h2>
 <form method="POST">
     {% csrf_token %}
@@ -8,5 +9,6 @@
     <button type="submit">O'zgarishlarni saqlash</button>
 </form>
 <br>
+{% endif %}
 <a href="{% url 'home' %}">Orqaga</a>
 {% endblock %}

@@ -2,24 +2,53 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>O'quv Markazi</title>
-    </head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}O'quv Markazi{% endblock %}</title>
 
-    <header>
-        <nav>
-            <a href="{% url 'home' %}">Bosh sahifa</a> |&nbsp;&nbsp;
-            {% if request.user %}
-            {{ request.user.username }}
-            {% endif %}
-        </nav>
-    </header>
-`   <main>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">O'quv Markazi</a>
+
+            <div class="ms-auto d-flex align-items-center">
+                {% if request.user.is_authenticated %}
+                    <span class="text-light me-3">
+                      <strong class="text-warning">{{ request.user.username }}</strong>
+                    </span>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Chiqish</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm me-2">Kirish</a>
+                    <a href="/user/register/" class="btn btn-warning btn-sm">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5 p-4 bg-white rounded shadow-sm">
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
-        <p>&copy; 2026 O'quv Markazi tizimi</p>
+
+    <footer class="bg-dark text-light text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 O'quv Markazi tizimi. Barcha huquqlar himoyalangan.</p>
+        </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

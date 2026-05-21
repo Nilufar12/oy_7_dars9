@@ -8,7 +8,10 @@
 
     <header>
         <nav>
-            <a href="{% url 'home' %}">Bosh sahifa</a> |
+            <a href="{% url 'home' %}">Bosh sahifa</a> |&nbsp;&nbsp;
+            {% if request.user %}
+            {{ request.user.username }}
+            {% endif %}
         </nav>
     </header>
 `   <main>
